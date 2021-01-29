@@ -1,19 +1,3 @@
-/*
- * Copyright 2002-2014 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package org.springframework.context;
 
 import org.springframework.beans.factory.HierarchicalBeanFactory;
@@ -24,9 +8,8 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.lang.Nullable;
 
 /**
- * Central interface to provide configuration for an application.
- * This is read-only while the application is running, but may be
- * reloaded if the implementation supports this.
+ * Central interface to provide configuration for an application. This is read-only while the
+ * application is running, but may be reloaded if the implementation supports this.
  *
  * <p>An ApplicationContext provides:
  * <ul>
@@ -54,14 +37,24 @@ import org.springframework.lang.Nullable;
  * @see ConfigurableApplicationContext
  * @see org.springframework.beans.factory.BeanFactory
  * @see org.springframework.core.io.ResourceLoader
+ * <p>
+ * <p>
+ * BeanFactory:spring管理bean的顶级接口,俗称基本容器,在该容器下有两个子接口分别是HierarchicalBeanFactory和ListableBeanFactory.
+ * HierarchicalBeanFactory:是一个具有层级关系的BeanFactory,其中包含一个很重要的属性为parentBeanFactory.
+ * ListableBeanFactory:是以枚举的方式列举当前beanFactory中所有的bean对象.
+ * ApplicationEventPublisher:是一个封装事件发布的接口.
+ * ResourceLoader:是spring用来加载资源的顶级接口,主要是从给定的资源中加载文件.
+ * MessageSource:是一个解析message的顶级策略接口,在平时的开发中我们几乎用不到.
+ * EnvironmentCapable:用于获取当前容器的上下文环境.
  */
-//中央接口，为应用程序提供配置。
-//在应用程序运行时是只读的，但如果实现支持，则可以重新加载。
-public interface ApplicationContext extends EnvironmentCapable, ListableBeanFactory, HierarchicalBeanFactory,
+
+public interface ApplicationContext extends EnvironmentCapable, ListableBeanFactory,
+		HierarchicalBeanFactory,
 		MessageSource, ApplicationEventPublisher, ResourcePatternResolver {
 
 	/**
 	 * Return the unique id of this application context.
+	 *
 	 * @return the unique id of the context, or {@code null} if none
 	 */
 	@Nullable
@@ -69,25 +62,29 @@ public interface ApplicationContext extends EnvironmentCapable, ListableBeanFact
 
 	/**
 	 * Return a name for the deployed application that this context belongs to.
+	 *
 	 * @return a name for the deployed application, or the empty String by default
 	 */
 	String getApplicationName();
 
 	/**
 	 * Return a friendly name for this context.
+	 *
 	 * @return a display name for this context (never {@code null})
 	 */
 	String getDisplayName();
 
 	/**
 	 * Return the timestamp when this context was first loaded.
+	 *
 	 * @return the timestamp (ms) when this context was first loaded
 	 */
 	long getStartupDate();
 
 	/**
-	 * Return the parent context, or {@code null} if there is no parent
-	 * and this is the root of the context hierarchy.
+	 * Return the parent context, or {@code null} if there is no parent and this is the root of the
+	 * context hierarchy.
+	 *
 	 * @return the parent context, or {@code null} if there is no parent
 	 */
 	@Nullable
@@ -96,21 +93,22 @@ public interface ApplicationContext extends EnvironmentCapable, ListableBeanFact
 	/**
 	 * Expose AutowireCapableBeanFactory functionality for this context.
 	 * <p>This is not typically used by application code, except for the purpose of
-	 * initializing bean instances that live outside of the application context,
-	 * applying the Spring bean lifecycle (fully or partly) to them.
+	 * initializing bean instances that live outside of the application context, applying the Spring
+	 * bean lifecycle (fully or partly) to them.
 	 * <p>Alternatively, the internal BeanFactory exposed by the
-	 * {@link ConfigurableApplicationContext} interface offers access to the
-	 * {@link AutowireCapableBeanFactory} interface too. The present method mainly
-	 * serves as a convenient, specific facility on the ApplicationContext interface.
+	 * {@link ConfigurableApplicationContext} interface offers access to the {@link
+	 * AutowireCapableBeanFactory} interface too. The present method mainly serves as a convenient,
+	 * specific facility on the ApplicationContext interface.
 	 * <p><b>NOTE: As of 4.2, this method will consistently throw IllegalStateException
-	 * after the application context has been closed.</b> In current Spring Framework
-	 * versions, only refreshable application contexts behave that way; as of 4.2,
-	 * all application context implementations will be required to comply.
+	 * after the application context has been closed.</b> In current Spring Framework versions, only
+	 * refreshable application contexts behave that way; as of 4.2, all application context
+	 * implementations will be required to comply.
+	 *
 	 * @return the AutowireCapableBeanFactory for this context
-	 * @throws IllegalStateException if the context does not support the
-	 * {@link AutowireCapableBeanFactory} interface, or does not hold an
-	 * autowire-capable bean factory yet (e.g. if {@code refresh()} has
-	 * never been called), or if the context has been closed already
+	 * @throws IllegalStateException if the context does not support the {@link AutowireCapableBeanFactory}
+	 *                               interface, or does not hold an autowire-capable bean factory
+	 *                               yet (e.g. if {@code refresh()} has never been called), or if
+	 *                               the context has been closed already
 	 * @see ConfigurableApplicationContext#refresh()
 	 * @see ConfigurableApplicationContext#getBeanFactory()
 	 */

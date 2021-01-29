@@ -21,10 +21,8 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Future;
-
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
-
 import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.core.BridgeMethodResolver;
@@ -109,7 +107,6 @@ public class AsyncExecutionInterceptor extends AsyncExecutionAspectSupport imple
 			throw new IllegalStateException(
 					"No executor specified and no default executor set on AsyncExecutionInterceptor either");
 		}
-
 		Callable<Object> task = () -> {
 			try {
 				Object result = invocation.proceed();
@@ -125,7 +122,6 @@ public class AsyncExecutionInterceptor extends AsyncExecutionAspectSupport imple
 			}
 			return null;
 		};
-
 		return doSubmit(task, executor, invocation.getMethod().getReturnType());
 	}
 

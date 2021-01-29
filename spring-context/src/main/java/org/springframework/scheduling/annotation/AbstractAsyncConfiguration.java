@@ -19,7 +19,6 @@ package org.springframework.scheduling.annotation;
 import java.util.Collection;
 import java.util.concurrent.Executor;
 import java.util.function.Supplier;
-
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -30,14 +29,14 @@ import org.springframework.lang.Nullable;
 import org.springframework.util.CollectionUtils;
 
 /**
- * Abstract base {@code Configuration} class providing common structure for enabling
- * Spring's asynchronous method execution capability.
+ * Abstract base {@code Configuration} class providing common structure for enabling Spring's
+ * asynchronous method execution capability.
  *
  * @author Chris Beams
  * @author Juergen Hoeller
  * @author Stephane Nicoll
- * @since 3.1
  * @see EnableAsync
+ * @since 3.1
  */
 @Configuration
 public abstract class AbstractAsyncConfiguration implements ImportAware {
@@ -58,7 +57,8 @@ public abstract class AbstractAsyncConfiguration implements ImportAware {
 				importMetadata.getAnnotationAttributes(EnableAsync.class.getName(), false));
 		if (this.enableAsync == null) {
 			throw new IllegalArgumentException(
-					"@EnableAsync is not present on importing class " + importMetadata.getClassName());
+					"@EnableAsync is not present on importing class " + importMetadata
+							.getClassName());
 		}
 	}
 

@@ -401,9 +401,9 @@ public interface ConfigurableBeanFactory extends HierarchicalBeanFactory, Single
 
 	/**
 	 * Destroy all singleton beans in this factory, including inner beans that have
-	 * been registered as disposable. To be called on shutdown of a factory.
+	 * been registered as disposable（一次性）. To be called on shutdown of a factory.
 	 * <p>Any exception that arises during destruction should be caught
-	 * and logged instead of propagated to the caller of this method.
+	 * and logged instead of propagated（传播)） to the caller of this method.
 	 */
 	void destroySingletons();
 

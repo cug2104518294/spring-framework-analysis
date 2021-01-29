@@ -539,6 +539,16 @@ class ConfigurationClassParser {
 		}
 	}
 
+    /**
+	 * ImportSelector的导入实现是通过BeanFactoryPostProcessor接口的子接口BeanDefinitionRegistryPostProcessor来实现的。
+	 * ImportSelector接口的处理是伴随着@Configuration注解的处理一起处理的。
+	 * ImportSelector接口可以实现自定义条件选择性导入classes。
+	 * ImportSelector接口的字接口DeferredImportSelector在所有@Configuration处理完成后才被处理的。
+	 * 处理ImportSelector接口时，bean定义已经被加载，但是bean还没有被实例化。
+	 * Spring Bootn的自动配置功能就是通过DeferredImportSelector接口的实现类EnableAutoConfigurationImportSelector做到的。
+	 *
+	 * 链接：https://www.jianshu.com/p/23d4e853b15b
+	 * **/
 	private void processImports(ConfigurationClass configClass, SourceClass currentSourceClass,
 			Collection<SourceClass> importCandidates, boolean checkForCircularImports) {
 

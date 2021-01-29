@@ -136,7 +136,7 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
 				重点在loadBeanDefinitions(beanFactory)方法
 			 */
 			DefaultListableBeanFactory beanFactory = createBeanFactory();
-			// 设置BeanFactory的一些基本信息  序列化id; 如果需要的话， 让这个Bean Fact 。ry 从id 反序列4四U Bean Factory 对象
+			// 设置BeanFactory的一些基本信息  序列化id; 如果需要的话， 让这个BeanFactory 从id 反序列4四U Bean Factory 对象
 			beanFactory.setSerializationId(getId());
 			/*
 				自定义两个属性

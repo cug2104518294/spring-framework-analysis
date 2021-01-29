@@ -43,7 +43,6 @@ public abstract class TransactionSynchronizationUtils {
 	private static final boolean aopAvailable = ClassUtils.isPresent(
 			"org.springframework.aop.scope.ScopedObject", TransactionSynchronizationUtils.class.getClassLoader());
 
-
 	/**
 	 * Check whether the given resource transaction managers refers to the given
 	 * (underlying) resource factory.

@@ -519,10 +519,14 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 */
 	@Override
 	public void refresh() throws BeansException, IllegalStateException {
-		// 同步，线程安全； 防止 fresh还没结束  就又进入改方法 导致容器初始化错乱
+		// 同步 线程安全
+		// 防止refresh还没结束  就又进入改方法 导致容器初始化错乱
 		synchronized (this.startupShutdownMonitor) {
 			// Prepare this context for refreshing.
-			// 准备刷新 记录开始时间  设置几个标志位  验证环境属性
+			//该方法其主要的作用是对上下文环境的初始化准备工作,
+			// 如对系统环境或者系统属性变量的准备验证过程,
+			// 这个变量的设置可能会影响着系统的正确性,
+			// 我们可以通过重写initPropertySources方法就可以了
 			prepareRefresh();
 
 			// Tell the subclass to refresh the internal bean factory.
@@ -682,7 +686,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 * @see org.springframework.web.context.support.WebApplicationContextUtils#initServletPropertySources
 	 */
 	/*
-		initPropertySources正符合Spring 的开放式结构设计，给用户最大扩展Spring 的能力。
+	    initPropertySources正符合Spring 的开放式结构设计，给用户最大扩展Spring 的能力。
 		用户可以根据自身的需要重写initPropertySources 方法，并在方法中进行个性化的属性处理及设置。
 	 */
 	protected void initPropertySources() {
@@ -699,7 +703,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		2. 初始化BeanFactory, 并进行XML 文件读取。
 	之前有提到ClassPathXm!ApplicationContext 包含着BeanFactory 所提供的一切特征，那么
 	在这一步骤中将会复用BeanFactory 中的配置文件读取解析及其他功能，这一步之后，
-	ClassPathXmlApplicationContext 实际上就已经包含了B eanFactory 所提供的功能，也就是可以
+	ClassPathXmlApplicationContext 实际上就已经包含了BeanFactory 所提供的功能，也就是可以
 	进行bean 的提取等基础操作了。
 	 */
 	protected ConfigurableListableBeanFactory obtainFreshBeanFactory() {
@@ -717,7 +721,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 * @param beanFactory the BeanFactory to configure
 	 */
 	/*
-			3. 对BeanFactory 进行各种功能填充。
+	    3. 对BeanFactory 进行各种功能填充。
 		@Qualifier 与@Autowired 应该是大家非常熟悉的注解，那么这两个注解正是在这一步骤中
 		增加的支持。
 	 */
