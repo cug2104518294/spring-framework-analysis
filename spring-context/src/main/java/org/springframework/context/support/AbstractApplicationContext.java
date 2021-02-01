@@ -701,14 +701,12 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 */
 	/*
 		2. 初始化BeanFactory, 并进行XML 文件读取。
-	之前有提到ClassPathXm!ApplicationContext 包含着BeanFactory 所提供的一切特征，那么
+	之前有提到ClassPathXmlApplicationContext 包含着BeanFactory 所提供的一切特征，那么
 	在这一步骤中将会复用BeanFactory 中的配置文件读取解析及其他功能，这一步之后，
 	ClassPathXmlApplicationContext 实际上就已经包含了BeanFactory 所提供的功能，也就是可以
 	进行bean 的提取等基础操作了。
 	 */
 	protected ConfigurableListableBeanFactory obtainFreshBeanFactory() {
-		// refreshBeanFactory 核心方法
-		// 就是获取 refreshBeanFactory 方法所创建的 BeanFactory
 		refreshBeanFactory();
 		// 将创建的BeanFactory【DefaultListableBeanFactory类型】返回
 		return getBeanFactory();
